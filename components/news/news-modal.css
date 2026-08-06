@@ -1,0 +1,1140 @@
+/* ── News modal (season winners + admin) ───────────────────────── */
+
+.newsBackdrop {
+  z-index: 126;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: newsFadeIn 0.35s ease;
+}
+
+.newsBackdrop--season {
+  background:
+    radial-gradient(
+      circle at 50% 10%,
+      rgba(212, 175, 55, 0.18),
+      transparent 42%
+    ),
+    rgba(4, 8, 18, 0.88);
+}
+
+.newsBackdrop--admin {
+  background: rgba(5, 8, 16, 0.86);
+}
+
+.newsModalShell {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  animation: newsModalRise 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.newsModalShell--season {
+  width: min(68vw, 740px);
+  border: 1px solid #c8a23a;
+  border-radius: 16px;
+  overflow: visible;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(201, 162, 39, 0.18),
+      transparent 52%
+    ),
+    radial-gradient(circle at 50% 35%, rgba(30, 48, 88, 0.35), transparent 62%),
+    linear-gradient(180deg, #0b0e18 0%, #0a1020 52%, #070b14 100%);
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.72),
+    0 0 48px rgba(201, 162, 39, 0.14),
+    inset 0 0 0 1px rgba(255, 220, 130, 0.08);
+}
+
+.newsModalShell--admin {
+  width: min(920px, 96vw);
+  border: 1px solid rgba(214, 181, 88, 0.35);
+  border-radius: 14px;
+  background: #0d1220;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+}
+
+.newsModalCloseBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 6;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 181, 88, 0.75);
+  background: rgba(8, 12, 22, 0.88);
+  color: #f3d67d;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.newsModalCloseBtn--admin {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #eef2f8;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.newsModalCloseBtn:hover {
+  transform: scale(1.06);
+  background: rgba(201, 162, 39, 0.2);
+}
+
+/* ── Season winners ───────────────────────────────────────────── */
+
+.newsSeasonFx {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.newsSeasonConfetti {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  background-image:
+    radial-gradient(circle, rgba(255, 72, 72, 0.95) 0 1.5px, transparent 1.7px),
+    radial-gradient(
+      circle,
+      rgba(72, 150, 255, 0.95) 0 1.5px,
+      transparent 1.7px
+    ),
+    radial-gradient(
+      circle,
+      rgba(90, 220, 120, 0.95) 0 1.5px,
+      transparent 1.7px
+    ),
+    radial-gradient(circle, rgba(255, 220, 80, 0.95) 0 1.5px, transparent 1.7px);
+  background-size:
+    88px 88px,
+    108px 108px,
+    128px 128px,
+    148px 148px;
+  background-position:
+    8px 6px,
+    44px 28px,
+    82px 10px,
+    120px 52px;
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 42%,
+    transparent 68%
+  );
+}
+
+.newsSeasonStardust {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.85) 0 0.8px, transparent 1px),
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.55) 0 0.6px,
+      transparent 0.8px
+    );
+  background-size:
+    56px 56px,
+    84px 84px;
+  background-position:
+    0 0,
+    24px 18px;
+}
+
+.newsSeasonHeaderGlow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 78%;
+  height: 180px;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 210, 90, 0.22),
+    transparent 68%
+  );
+  pointer-events: none;
+}
+
+.newsSeasonGlow {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.38);
+}
+
+.newsSeasonInner {
+  position: relative;
+  z-index: 1;
+  padding: 20px 28px 16px;
+  overflow: visible;
+}
+
+.newsSeasonHeader {
+  text-align: center;
+  padding: 0;
+}
+
+.newsSeasonTrophyWrap {
+  position: relative;
+  width: 168px;
+  height: 132px;
+  margin: 0 auto;
+}
+
+.newsSeasonTrophyGlow {
+  position: absolute;
+  inset: 8% 0 0;
+  background: radial-gradient(circle, rgba(255, 210, 90, 0.5), transparent 70%);
+  filter: blur(10px);
+}
+
+.newsSeasonTrophy {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 168px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(201, 162, 39, 0.45));
+}
+
+.newsSeasonEyebrow {
+  font-family: "Cinzel", "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-top: 0;
+}
+
+.newsSeasonHeadline {
+  margin: 10px 0 0;
+  font-family: "Cinzel", "Times New Roman", serif;
+  font-size: clamp(3rem, 9vw, 3rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    180deg,
+    #fff4c4 0%,
+    #d4af37 38%,
+    #c8942f 72%,
+    #a87418 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 3px 14px rgba(201, 162, 39, 0.32));
+}
+
+.newsSeasonIntro {
+  margin: 15px auto 0;
+  max-width: 420px;
+}
+
+.newsSeasonIntro p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #a0a0a0;
+}
+
+.newsSeasonIntro p + p {
+  margin-top: 4px;
+}
+
+.newsSeasonPodium {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: end;
+  width: min(100%, 500px);
+  margin: 30px auto 0;
+  padding-top: 34px;
+  overflow: visible;
+}
+
+.newsSeasonPodiumCard {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  min-width: 0;
+  padding: 15px 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(214, 181, 88, 0.14);
+  background: rgba(6, 10, 20, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.newsSeasonPodiumCard.first {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-color: rgba(212, 175, 55, 0.65);
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 220, 120, 0.2),
+      transparent 64%
+    ),
+    rgba(8, 12, 24, 0.92);
+  transform: translateY(-12px);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.32),
+    0 0 28px rgba(212, 175, 55, 0.22);
+}
+
+.newsSeasonPodiumCard.second,
+.newsSeasonPodiumCard.third {
+  margin-top: 22px;
+}
+
+.newsSeasonPodiumSpacer {
+  min-height: 1px;
+}
+
+.newsSeasonMedalHang {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  pointer-events: none;
+}
+
+.newsSeasonMedalBadge {
+  display: block;
+  width: auto;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+}
+
+.newsSeasonAvatarRing {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  margin-top: 5px;
+  padding: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 240, 170, 0.95),
+    rgba(201, 162, 39, 0.5)
+  );
+}
+
+.newsSeasonPodiumCard.first .newsSeasonAvatarRing {
+  width: 84px;
+  height: 84px;
+}
+
+.newsSeasonAvatarRing.silver {
+  background: linear-gradient(180deg, #f4f7fb, #8fa0b8);
+}
+
+.newsSeasonAvatarRing.bronze {
+  background: linear-gradient(180deg, #f0c9a0, #a86428);
+}
+
+.newsSeasonAvatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(8, 12, 22, 0.92);
+  background: #152238;
+}
+
+.newsSeasonPlayerName {
+  max-width: 100%;
+  margin-top: 5px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f4f7fc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.newsSeasonPlayerName.featured {
+  color: #d4af37;
+  font-size: 0.88rem;
+}
+
+.newsSeasonStatLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a0a0a0;
+}
+
+.newsSeasonStatValue {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.newsSeasonStatValue.featured {
+  font-size: clamp(0.95rem, 2.8vw, 1.12rem);
+  font-weight: 800;
+  color: #d4af37;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
+}
+
+.newsSeasonListCard {
+  margin-top: 25px;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid rgba(214, 181, 88, 0.12);
+  background: rgba(5, 9, 18, 0.88);
+  max-height: min(28vh, 200px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 162, 39, 0.45) transparent;
+}
+
+.newsSeasonListRow {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.newsSeasonListRow:last-child {
+  border-bottom: none;
+}
+
+.newsSeasonListRank {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #d7deea;
+  text-align: center;
+}
+
+.newsSeasonListPlayer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.newsSeasonListAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(8, 12, 22, 0.9);
+  background: #152238;
+  flex-shrink: 0;
+}
+
+.newsSeasonListCopy {
+  min-width: 0;
+}
+
+.newsSeasonListName {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #f4f7fc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.newsSeasonListLabel {
+  font-size: 0.66rem;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.newsSeasonListValue {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #edf2f8;
+  white-space: nowrap;
+}
+
+.newsSeasonFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.newsSeasonExpiry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #a0a0a0;
+  flex: 1 1 180px;
+}
+
+.newsSeasonExpiryIcon {
+  font-size: 0.85rem;
+}
+
+.newsSeasonActions {
+  display: flex;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.newsSeasonLaterBtn,
+.newsSeasonPrimaryBtn {
+  min-height: auto;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.16s ease,
+    filter 0.16s ease;
+}
+
+.newsSeasonLaterBtn {
+  border: 1px solid rgba(214, 214, 220, 0.35);
+  background: rgba(8, 12, 22, 0.65);
+  color: #d7deea;
+}
+
+.newsSeasonLaterBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.newsSeasonPrimaryBtn {
+  border: 1px solid rgba(255, 228, 150, 0.35);
+  background: linear-gradient(180deg, #ffd76a 0%, #e8a82e 48%, #c87412 100%);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(201, 162, 39, 0.35);
+  text-shadow: 0 1px 0 rgba(80, 40, 0, 0.25);
+}
+
+.newsSeasonPrimaryBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.newsSeasonDismiss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: #a0a0a0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.newsSeasonDismiss input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.newsSeasonDismissBox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(214, 181, 88, 0.45);
+  background: rgba(255, 255, 255, 0.03);
+  display: grid;
+  place-items: center;
+}
+
+.newsSeasonDismissBox::after {
+  content: "✓";
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #241604;
+  opacity: 0;
+}
+
+.newsSeasonDismiss input:checked + .newsSeasonDismissBox {
+  background: linear-gradient(180deg, #f0c85a, #b88418);
+  border-color: #f0c85a;
+}
+
+.newsSeasonDismiss input:checked + .newsSeasonDismissBox::after {
+  opacity: 1;
+}
+
+/* ── Admin news (split layout) ────────────────────────────────── */
+
+.newsAdminSplit {
+  display: grid;
+  grid-template-columns: 42% 58%;
+  min-height: 420px;
+}
+
+.newsAdminVisual {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1a2848, #0d1220);
+  min-height: 280px;
+}
+
+.newsAdminVisualImage,
+.newsAdminVisualFallback {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.newsAdminVisualFallback {
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(120, 180, 255, 0.25),
+      transparent 45%
+    ),
+    linear-gradient(160deg, #243860, #121a30);
+}
+
+.newsAdminVisualOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(8, 10, 18, 0.72)
+  );
+}
+
+.newsAdminRibbon {
+  position: absolute;
+  top: 18px;
+  left: -34px;
+  z-index: 2;
+  width: 120px;
+  padding: 6px 0;
+  transform: rotate(-42deg);
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #fff;
+  background: linear-gradient(180deg, #5a9fff, #2f6fd6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.newsAdminVisualCopy {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 20px;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+}
+
+.newsAdminVisualCopy strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.newsAdminVisualCopy span {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.newsAdminPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 24px 20px;
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(120, 160, 255, 0.08),
+      transparent 40%
+    ),
+    #0d1220;
+}
+
+.newsAdminQueue {
+  margin-bottom: 10px;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 255, 0.7);
+}
+
+.newsAdminHeader {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.newsAdminMegaphone {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(240, 200, 90, 0.35);
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.newsAdminMegaphone svg {
+  width: 26px;
+  height: 26px;
+}
+
+.newsAdminEyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8eb8ff;
+}
+
+.newsAdminTitle {
+  margin: 4px 0 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #f4f7fc;
+}
+
+.newsAdminCollapseList {
+  flex: 1;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: min(38vh, 320px);
+  padding-right: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(140, 170, 255, 0.4) transparent;
+}
+
+.newsAdminCollapseItem {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.newsAdminCollapseItem.is-open {
+  border-color: rgba(120, 160, 255, 0.28);
+  background: rgba(120, 160, 255, 0.06);
+}
+
+.newsAdminCollapseTrigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.newsAdminCollapseIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #8eb8ff;
+  background: rgba(120, 160, 255, 0.12);
+}
+
+.newsAdminCollapseCopy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.newsAdminCollapseEyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 255, 0.75);
+}
+
+.newsAdminCollapseTitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #f4f7fc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.newsAdminCollapseDate {
+  font-size: 0.7rem;
+  color: #8d99ae;
+  white-space: nowrap;
+}
+
+.newsAdminCollapseBody {
+  padding: 0 14px 14px 46px;
+}
+
+.newsAdminCollapseBody .newsAdminIntro {
+  margin-top: 0;
+}
+
+.newsAdminCollapseBody .newsAdminBody {
+  margin-top: 8px;
+  max-height: none;
+  overflow: visible;
+}
+
+.newsAdminDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.76rem;
+  color: #8d99ae;
+}
+
+.newsAdminIntro {
+  margin: 14px 0 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #c7cfdd;
+}
+
+.newsAdminBody {
+  flex: 1;
+  margin-top: 14px;
+  padding-right: 4px;
+  overflow-y: auto;
+  max-height: min(34vh, 280px);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #c7cfdd;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(140, 170, 255, 0.4) transparent;
+}
+
+.newsAdminRichContent > :first-child {
+  margin-top: 0;
+}
+
+.newsAdminRichContent > :last-child {
+  margin-bottom: 0;
+}
+
+.newsAdminRichContent p,
+.newsAdminRichContent h1,
+.newsAdminRichContent h2,
+.newsAdminRichContent h3,
+.newsAdminRichContent h4,
+.newsAdminRichContent ul,
+.newsAdminRichContent ol,
+.newsAdminRichContent blockquote {
+  margin: 0 0 10px;
+}
+
+.newsAdminRichContent h2,
+.newsAdminRichContent h3,
+.newsAdminRichContent h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f0c85a;
+  padding-top: 8px;
+  border-top: 1px solid rgba(240, 200, 90, 0.15);
+}
+
+.newsAdminRichContent h2::before,
+.newsAdminRichContent h3::before {
+  content: "✦";
+  font-size: 0.62rem;
+  color: #f0c85a;
+}
+
+.newsAdminRichContent ul,
+.newsAdminRichContent ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+.newsAdminRichContent li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.newsAdminRichContent strong,
+.newsAdminRichContent b {
+  color: #fff0c2;
+}
+
+.newsAdminRichContent img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.newsAdminFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.newsAdminDismiss {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #9aa6ba;
+  cursor: pointer;
+  user-select: none;
+}
+
+.newsAdminDismiss input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.newsAdminDismissBox {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  display: grid;
+  place-items: center;
+}
+
+.newsAdminDismissBox::after {
+  content: "✓";
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #0d1220;
+  opacity: 0;
+}
+
+.newsAdminDismiss input:checked + .newsAdminDismissBox {
+  background: #f0c85a;
+  border-color: #f0c85a;
+}
+
+.newsAdminDismiss input:checked + .newsAdminDismissBox::after {
+  opacity: 1;
+}
+
+.newsAdminPrimaryBtn {
+  min-width: 140px;
+  min-height: 42px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #241604;
+  cursor: pointer;
+  background: linear-gradient(180deg, #f5d76b 0%, #d4a62a 50%, #a87418 100%);
+  box-shadow: 0 8px 20px rgba(201, 162, 39, 0.28);
+  transition:
+    transform 0.16s ease,
+    filter 0.16s ease;
+}
+
+.newsAdminPrimaryBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+@keyframes newsFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes newsModalRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 860px) {
+  .newsModalShell--season,
+  .newsModalShell--admin {
+    width: 100% !important;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .newsModalShell--season {
+    width: 100% !important;
+  }
+
+  .newsSeasonInner {
+    padding: 18px 20px 14px;
+  }
+
+  .newsSeasonPodium {
+    gap: 10px;
+    width: min(100%, 400px);
+    margin-top: 24px;
+    padding-top: 28px;
+  }
+
+  .newsSeasonPodiumCard {
+    padding: 14px 8px 10px;
+    gap: 4px;
+  }
+
+  .newsSeasonPodiumCard.first {
+    transform: none;
+    padding-top: 32px;
+  }
+
+  .newsSeasonPodiumCard.second,
+  .newsSeasonPodiumCard.third {
+    margin-top: 14px;
+  }
+
+  .newsSeasonListCard {
+    margin-top: 20px;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .newsSeasonListRow {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .newsSeasonAvatarRing {
+    width: 58px;
+    height: 58px;
+  }
+
+  .newsSeasonPodiumCard.first .newsSeasonAvatarRing {
+    width: 72px;
+    height: 72px;
+  }
+
+  .newsSeasonMedalBadge {
+    height: 48px;
+  }
+
+  .newsSeasonFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsSeasonActions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .newsSeasonLaterBtn,
+  .newsSeasonPrimaryBtn {
+    flex: 1;
+  }
+
+  .newsAdminSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .newsAdminVisual {
+    min-height: 200px;
+  }
+
+  .newsAdminVisualImage,
+  .newsAdminVisualFallback {
+    min-height: 200px;
+    max-height: 220px;
+  }
+
+  .newsAdminPanel {
+    padding: 16px;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .newsAdminCollapseList {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .newsAdminFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsAdminPrimaryBtn {
+    width: 100%;
+  }
+}
